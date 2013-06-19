@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+#Server in python
 
 from SocketServer import TCPServer, StreamRequestHandler as RH
 import socket
@@ -13,15 +14,19 @@ ADDR = (HOST, PORT)
 
 
 class MyServer(TCPServer):
+    """ A TCPServer """
     def __init__(self, server_address, request_class_handler):
         TCPServer.__init__(self, server_address, request_class_handler)
 
 
 
 class MimeType:
+    """ MimeType helper class"""
+    #get mimetype from file /etc/mime.types in unix system
     files = '/etc/mime.types'
     mime_map = None
     def __init__(self):
+        """ set up mimetype"""
         if not MimeType.mime_map:
             self.setup()
 
@@ -40,6 +45,7 @@ class MimeType:
             MimeType.mime_map['.' +ext] = mime
 
     def get_mime_type(self,ext):
+        """ get mimetype by extension"""
         return MimeType.mime_map[ext]
 
 

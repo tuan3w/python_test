@@ -1,12 +1,14 @@
 #!/usr/bin/python
 
+#get information from logfile
+#example file: apache2.log
 
 import re
 import urlparse
 
 
 def get_all_success_links(path):
-    'Get all link with success tatus(status code is 200)'
+    """Get all link with success tatus(status code is 200)"""
     # sample log:
     #(domain:port)  (ip)           (date_access)                (method url            http_version)    (status_code)   (total)     (referer)       'user-agent'
     #cnweb:80       127.0.0.1 - - [10/Jun/2013:08:53:37 +0700] "GET /js/cab.youtube.js HTTP/1.1"        304             211         "http://cnweb/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.22 (KHTML, like Gecko) Ubuntu Chromium/25.0.1364.160 Chrome/25.0.1364.160 Safari/537.22"
@@ -40,6 +42,8 @@ def save_to_file(my_dict, file_name):
 
 
 def rank_by_visit(log_file='apache2.log', out_file='ranked.out'):
+    """Rank site by visited"""
+
     passed_url = {}  # map contain all passed link
     for parsed_line in get_all_success_links(log_file):
         #print parsed_line['domain'], parsed_line['url']
